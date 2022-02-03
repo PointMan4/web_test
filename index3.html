@@ -5,23 +5,39 @@
 
 <script>
 
-readTextFile("/static/file/userInfo.txt");
+readTextFile("web_test/static/file/userInfo.txt");
 
 function readTextFile(file) {
         var rawFile = new XMLHttpRequest();
+        let stringArr;
         rawFile.open("GET", file, false);
         rawFile.onreadystatechange = function () {
             if(rawFile.readyState === 4)
             {
                 if(rawFile.status === 200 || rawFile.status == 0)
                 {
-                    var allText = rawFile.responseText;
-                    console.log(allText);
+                    let allText = rawFile.responseText;
+                    stringArr = allText.split(/\n/);
+            
+                    for(var i = 0; i < stringArr.length; i++){
+                        console.log(i + " : " + stringArr[i])
+            
+                    }
+
+                    console.log("-------------------")
+
+                    stringArr[2] = "4, '4444', '機械学習コース', '2019年01月期'";
+
+                    for(var i = 0; i < stringArr.length; i++){
+                        console.log(i + " : " + stringArr[i])
+            
+                    }
+
                 }
             }
         };
+
+
         rawFile.send(null);
     }
-
-    
 </script>
